@@ -17,7 +17,7 @@ def attach_vol(target_instance_id, target_volume_id, target_region):
 			try:
 				volume_attachment_response = ec2_client.attach_volume(Device=target_device_name, InstanceId=target_instance_id, VolumeId=target_volume_id)
 			except Exception as e: 
-				if 'is already in use' in str(e) or "is not 'available'" in str(e):
+				if 'is already in use' in str(e):
 					continue
 				else:
 					print(str(e))
