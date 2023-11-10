@@ -25,3 +25,4 @@ if target_action == 'attach':
 		print(attachment_response)
 
 		rename_os_drive(target_instance_id, target_volume_id, target_region)
+		print(f'Attached drive name is Temp ({target_volume_id})')
