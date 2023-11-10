@@ -1,9 +1,9 @@
 import boto3
 import string
 
-def create_vol(target_instance_id, target_snapshot_id):
-	ec2_client = boto3.client("ec2")
-	ec2_resource = boto3.resource('ec2')
+def create_vol(target_instance_id, target_snapshot_id, target_region):
+	ec2_client = boto3.client("ec2", region_name = target_region)
+	ec2_resource = boto3.resource('ec2', region_name = target_region)
 
 	temp_device_names = []
 	alphabet = list(string.ascii_lowercase)

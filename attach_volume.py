@@ -1,8 +1,8 @@
 import boto3
 import string
 
-def attach_vol(target_instance_id, target_volume_id):
-	ec2_client = boto3.client("ec2")
+def attach_vol(target_instance_id, target_volume_id, target_region):
+	ec2_client = boto3.client("ec2", region_name = target_region)
 	
 	attached = False
 

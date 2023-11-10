@@ -1,10 +1,7 @@
 import boto3
 import time
 
-def rename_os_drive(target_instance_id, target_volume_id):
-	ec2_client = boto3.client("ec2")
-	target_region = ec2_client.describe_instances(InstanceIds=[target_instance_id])['Reservations'][0]['Instances'][0]['Placement']['AvailabilityZone'][:-1]
-
+def rename_os_drive(target_instance_id, target_volume_id, target_region):
 	ssm_file = open("rename_drive_ssm.json")
 	ssm_json = ssm_file.read()
 

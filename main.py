@@ -11,16 +11,17 @@ target_action = "attach"
 
 target_instance_id = os.environ["Instance ID"]
 target_snapshot_id = os.environ["Snapshot ID"]
+target_region = os.environ["Region"]
 
 
 if target_action == 'attach':
 	attach_type = attach_type
 
 	if attach_type == 'ami':
-		target_volume_id = create_vol(target_instance_id, target_snapshot_id)
+		target_volume_id = create_vol(target_instance_id, target_snapshot_id, target_region)
 		print(f'New volume {target_volume_id} has been created from {target_snapshot_id}')
 
-		attachment_response = attach_vol(target_instance_id, target_volume_id)
+		attachment_response = attach_vol(target_instance_id, target_volume_id, target_region)
 		print(attachment_response)
 
-		rename_os_drive(target_instance_id, target_volume_id)
+		rename_os_drive(target_instance_id, target_volume_id, target_region)
