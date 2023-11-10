@@ -1,5 +1,6 @@
 import boto3
 import string
+import time
 
 def attach_vol(target_instance_id, target_volume_id, target_region):
 	ec2_client = boto3.client("ec2", region_name = target_region)
@@ -8,6 +9,7 @@ def attach_vol(target_instance_id, target_volume_id, target_region):
 
 	volume_attachment_response = ""
 	device_slots = list(string.ascii_lowercase)[5:16]
+	time.sleep(10)
 	
 
 	for item in device_slots:
