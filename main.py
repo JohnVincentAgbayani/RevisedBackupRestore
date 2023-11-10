@@ -1,16 +1,17 @@
 import boto3
 import json
+import os
 
 from create_volume import create_vol
 from attach_volume import attach_vol
 from rename_drive import rename_os_drive
 
-sample_data = {"action":"attach", "snapshot_id":"snap-09d8559257f009973", "instance_id":"i-0e0ef4b5f42929f4e"}
 attach_type = "ami"
+target_action = "attach"
 
-target_instance_id = sample_data['instance_id']
-target_snapshot_id = sample_data['snapshot_id']
-target_action = sample_data['action']
+target_instance_id = os.environ["Instance ID"]
+target_snapshot_id = os.environ["Snapshot ID"]
+
 
 if target_action == 'attach':
 	attach_type = attach_type
