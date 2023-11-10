@@ -22,7 +22,8 @@ if target_action == 'attach':
 		print(f'New volume {target_volume_id} has been created from {target_snapshot_id}')
 
 		attachment_response = attach_vol(target_instance_id, target_volume_id, target_region)
-		print(attachment_response)
-
-		rename_os_drive(target_instance_id, target_volume_id, target_region)
-		print(f'\nAttached drive name is Temp ({target_volume_id})\n')
+		if attachment_response:
+			rename_os_drive(target_instance_id, target_volume_id, target_region)
+			print(f'\nAttached drive name is Temp ({target_volume_id})\n')
+		else:
+			print(f'\nNo more slots are available on the server\n')
