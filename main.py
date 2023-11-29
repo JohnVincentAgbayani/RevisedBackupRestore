@@ -19,7 +19,7 @@ if target_action == 'attach':
 
 	if attach_type == 'ami':
 		target_volume_id = create_vol(target_instance_id, target_snapshot_id, target_region)
-		print(f'New volume {target_volume_id} has been created from {target_snapshot_id}')
+		print(f'\nNew volume {target_volume_id} has been created from {target_snapshot_id}\n')
 
 		attachment_response = attach_vol(target_instance_id, target_volume_id, target_region)
 		if attachment_response:
