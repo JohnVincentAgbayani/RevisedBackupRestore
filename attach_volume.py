@@ -19,6 +19,7 @@ def attach_vol(target_instance_id, target_volume_id, target_region):
 		if not attached:
 			try:
 				volume_attachment_response = ec2_client.attach_volume(Device=target_device_name, InstanceId=target_instance_id, VolumeId=target_volume_id)
+				final_device_name = target_device_name
 			except Exception as e: 
 				if 'is already in use' in str(e):
 					continue
@@ -28,7 +29,7 @@ def attach_vol(target_instance_id, target_volume_id, target_region):
 			finally:
 				if volume_attachment_response:
 					attached = True
-					final_device_name = target_device_name
+					
 
 		
 
