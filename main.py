@@ -12,7 +12,6 @@ target_action = "attach"
 target_instance_id = os.environ["Instance ID"]
 target_snapshot_id = os.environ["Snapshot ID"]
 sctask_number = os.environ["SCTASK Number"].lower().replace('sctask','')
-
 target_instance = os.environ["Instance Name"].strip()
 
 region_lookup = {
@@ -27,23 +26,28 @@ region_lookup = {
 
 target_region = region_lookup[target_instance[:4].upper()]
 
-if target_action == 'attach':
-	attach_type = attach_type
+ec2_client = boto3.client("ec2", region_name = target_region)
 
-	if attach_type == 'ami':
-		target_volume_id = create_vol(target_instance_id, target_snapshot_id, target_region)
-		attachment_response = attach_vol(target_instance_id, target_volume_id, target_region)
+response = ec2_client.describe_instances(Filters=[{'Name':'tag:Name', 'Values':[target_instance]}])
+print(response)
 
-		if attachment_response[0]:
-			target_drive_letter = rename_os_drive(target_instance_id, target_volume_id, sctask_number, target_region).replace('\n','')
+# if target_action == 'attach':
+# 	attach_type = attach_type
 
-			print("\n========================================")
-			print("ATTACHMENT INFORMATION SUMMARY")
-			print("========================================")
-			print(f'Volume ID: {target_volume_id}')
-			print(f'Device Name: {attachment_response[1]}')
-			print(f'Drive Letter: {target_drive_letter}')
-			print(f'Drive Name: {sctask_number} ({target_volume_id})')
-			print('\nIMPORTANT! Please provide the information specified above in the ServiceNow case\n')
-		else:
-			print(f'\nERROR: Devices from xvdf to xvdp are already occupied. No more slots are available on the server.\n')
+# 	if attach_type == 'ami':
+# 		target_volume_id = create_vol(target_instance_id, target_snapshot_id, target_region)
+# 		attachment_response = attach_vol(target_instance_id, target_volume_id, target_region)
+
+# 		if attachment_response[0]:
+# 			target_drive_letter = rename_os_drive(target_instance_id, target_volume_id, sctask_number, target_region).replace('\n','')
+
+# 			print("\n========================================")
+# 			print("ATTACHMENT INFORMATION SUMMARY")
+# 			print("========================================")
+# 			print(f'Volume ID: {target_volume_id}')
+# 			print(f'Device Name: {attachment_response[1]}')
+# 			print(f'Drive Letter: {target_drive_letter}')
+# 			print(f'Drive Name: {sctask_number} ({target_volume_id})')
+# 			print('\nIMPORTANT! Please provide the information specified above in the ServiceNow case\n')
+# 		else:
+# 			print(f'\nERROR: Devices from xvdf to xvdp are already occupied. No more slots are available on the server.\n')
