@@ -23,6 +23,6 @@ def rename_os_drive(target_instance_id, target_volume_id, sctask_number, target_
 	print(ssm_status_response)
 
 	ssm_delete_response = ssm_client.delete_document(Name=ssm_doc_name)
-	print("Drive rename completed")
+	print("\nDrive rename completed\n")
 
 	return(ssm_status_response['StandardOutputContent'])
