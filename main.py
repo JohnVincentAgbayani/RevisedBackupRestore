@@ -11,9 +11,21 @@ target_action = "attach"
 
 target_instance_id = os.environ["Instance ID"]
 target_snapshot_id = os.environ["Snapshot ID"]
-target_region = os.environ["Region"]
 sctask_number = os.environ["SCTASK Number"].lower().replace('sctask','')
 
+target_instance = os.environ["Instance Name"].strip()
+
+region_lookup = {
+		"USEA":"us-east-1",
+		"USWE":"us-west-1",
+		"CACE":"ca-central-1",
+		"EUWE":"eu-west-1",
+		"EUCE":"eu-central-1",
+		"APSP":"ap-southeast-1",
+		"APAU":"ap-southeast-2"
+	}
+
+target_region = region_lookup[target_instance[:4].upper()]
 
 if target_action == 'attach':
 	attach_type = attach_type
