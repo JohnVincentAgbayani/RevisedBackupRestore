@@ -18,7 +18,19 @@
       "inputs": {
         "runCommand": [
           "",
-          "Write-Host 'test' ",
+          "$disks = Get-Disk",
+          "$target_label =  '{{VolumeID}}'",
+          "$target_snow = '{{CaseNum}}'",
+          "foreach($disk in $disks)",
+          "{if ($disk.SerialNumber.Contains($target_label.Replace('-','')))",
+          "{if ($disk.OperationalStatus -eq 'Offline')",
+          "{Set-Disk -Number $disk.Number -IsOffline $False}",
+          "if ($disk.IsReadOnly -eq 'True')",
+          "{Set-Disk -Number $disk.Number -IsReadOnly 0}",
+          "$target_partitions = Get-Partition -DiskNumber $disk.Number",
+          "$target_drive_letter = $target_partitions.Where({ $_.Type -eq 'Basic'}).DriveLetter",
+          "$target_label = $target_snow + ' (' + $target_label + ')'",
+          "Set-Volume -DriveLetter $target_drive_letter -NewFileSystemLabel $target_label}}",
           ""
         ]
       }
