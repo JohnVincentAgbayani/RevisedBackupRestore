@@ -12,6 +12,7 @@ target_action = "attach"
 target_instance_id = os.environ["Instance ID"]
 target_snapshot_id = os.environ["Snapshot ID"]
 target_region = os.environ["Region"]
+sctask_number = os.environ["SCTASK Number"]
 
 
 if target_action == 'attach':
@@ -23,7 +24,7 @@ if target_action == 'attach':
 
 		attachment_response = attach_vol(target_instance_id, target_volume_id, target_region)
 		if attachment_response:
-			rename_os_drive(target_instance_id, target_volume_id, target_region)
-			print(f'\nAttached drive name is Temp ({target_volume_id})\n')
+			rename_os_drive(target_instance_id, target_volume_id, sctask_number, target_region)
+			print(f'\nAttached drive name is: {sctask_number} ({target_volume_id})\n')
 		else:
-			print(f'\nNo more slots are available on the server\n')
+			print(f'\nERROR: Devices from xvdf to xvdp are already occupied. No more slots are available on the server.\n')
