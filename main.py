@@ -29,7 +29,7 @@ if target_action == 'attach':
 			print("ATTACHMENT INFORMATION SUMMARY")
 			print("========================================")
 			print(f'Volume ID: {target_volume_id}')
-			print(f'Device Name: {attachment_response}[1]')
+			print(f'Device Name: {attachment_response[1]}')
 			print(f'Drive Letter: {target_drive_letter}')
 			print(f'Drive Name: {sctask_number} ({target_volume_id})')
 			print('\nIMPORTANT! Please provide the information specified above in the ServiceNow case\n')
