@@ -10,6 +10,7 @@ def attach_vol(target_instance_id, target_volume_id, target_region):
 	volume_attachment_response = ""
 	device_slots = list(string.ascii_lowercase)[5:16]
 	time.sleep(10)
+	final_device_name = ""
 	
 
 	for item in device_slots:
@@ -27,6 +28,8 @@ def attach_vol(target_instance_id, target_volume_id, target_region):
 			finally:
 				if volume_attachment_response:
 					attached = True
+					final_device_name = target_device_name
+
 		
 
 	return [attached, target_device_name]
