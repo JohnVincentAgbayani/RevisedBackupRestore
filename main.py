@@ -24,7 +24,7 @@ if target_action == 'attach':
 
 		attachment_response = attach_vol(target_instance_id, target_volume_id, target_region)
 		if attachment_response:
-			target_drive_letter = rename_os_drive(target_instance_id, target_volume_id, sctask_number, target_region)
-			print(f'\nAttached drive name is: {target_drive_letter} {sctask_number} ({target_volume_id})\n')
+			target_drive_letter = rename_os_drive(target_instance_id, target_volume_id, sctask_number, target_region).replace('\n','')
+			print(f'\nAttached drive name is: {target_drive_letter}: {sctask_number} ({target_volume_id})\n')
 		else:
 			print(f'\nERROR: Devices from xvdf to xvdp are already occupied. No more slots are available on the server.\n')
