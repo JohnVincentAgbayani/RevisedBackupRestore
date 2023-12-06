@@ -12,7 +12,7 @@ target_action = "attach"
 target_instance_id = os.environ["Instance ID"]
 target_snapshot_id = os.environ["Snapshot ID"]
 target_region = os.environ["Region"]
-sctask_number = os.environ["SCTASK Number"]
+sctask_number = os.environ["SCTASK Number"].lower().replace('sctask','')
 
 
 if target_action == 'attach':
