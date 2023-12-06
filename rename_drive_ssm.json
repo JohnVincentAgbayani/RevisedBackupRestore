@@ -29,6 +29,7 @@
           "{Set-Disk -Number $disk.Number -IsReadOnly 0}",
           "$target_partitions = Get-Partition -DiskNumber $disk.Number",
           "$target_drive_letter = $target_partitions.Where({ $_.Type -eq 'Basic'}).DriveLetter",
+          "Write-Host $target_drive_letter",
           "$target_label = $target_snow + ' (' + $target_label + ')'",
           "Set-Volume -DriveLetter $target_drive_letter -NewFileSystemLabel $target_label}}",
           ""
