@@ -26,7 +26,7 @@ region_lookup = {
 target_region = region_lookup[target_instance[:4].upper()]
 
 ec2_client = boto3.client("ec2", region_name = target_region)
-target_instance_id = ec2_client.describe_instances(Filters=[{'Name':'tag:Name', 'Values':[target_instance]}])['Instances'][0]['InstanceId']
+target_instance_id = ec2_client.describe_instances(Filters=[{'Name':'tag:Name', 'Values':[target_instance]}])['Reservations'][0]['Instances'][0]['InstanceId']
 
 
 if target_action == 'attach':
