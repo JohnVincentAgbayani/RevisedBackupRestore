@@ -27,7 +27,7 @@ if target_action == 'attach':
 
 			print("\n========================================")
 			print("ATTACHMENT INFORMATION SUMMARY")
-			print("\n========================================")
+			print("========================================")
 			print(f'Volume ID: {target_volume_id}')
 			print(f'Device Name: {attachment_response}[1]')
 			print(f'Drive Letter: {target_drive_letter}')
