@@ -13,6 +13,8 @@ def create_vol(target_instance_id, target_snapshot_id, sctask_number, target_reg
 	volume_type = ec2_client.describe_volumes(VolumeIds=[snapshot_volume_id])["Volumes"][0]['VolumeType']
 
 	new_volume_id = ec2_client.create_volume(AvailabilityZone=availabilty_zone, SnapshotId=target_snapshot_id, VolumeType=volume_type)['VolumeId']
+	
+	sctask_number = "SCTASK" + sctask_number
 	ec2_client.create_tags(Resources=[new_volume_id], Tags=[{'Key':'AutoRestore','Value':'True'}, {'Key':'SCTASK','Value':sctask_number}])
 
 	return new_volume_id
