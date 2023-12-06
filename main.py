@@ -38,12 +38,13 @@ if target_action == 'attach':
 
 		if attachment_response[0]:
 			target_drive_letter = rename_os_drive(target_instance_id, target_volume_id, sctask_number, target_region).replace('\n','')
+			target_device_name = attachment_response[1]['Device']
 
 			print("\n========================================")
 			print("ATTACHMENT INFORMATION SUMMARY")
 			print("========================================")
 			print(f'Volume ID: {target_volume_id}')
-			print(f'Device Name: {attachment_response[1]['Device']}')
+			print(f'Device Name: {target_device_name}')
 			print(f'Drive Letter: {target_drive_letter}')
 			print(f'Drive Name: {sctask_number} ({target_volume_id})')
 			print('\nIMPORTANT! Please provide the information specified above in the ServiceNow case\n')
