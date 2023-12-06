@@ -29,4 +29,4 @@ def attach_vol(target_instance_id, target_volume_id, target_region):
 					attached = True
 		
 
-	return attached
+	return [attached, target_device_name]

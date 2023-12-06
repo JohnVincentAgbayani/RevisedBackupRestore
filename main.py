@@ -20,11 +20,18 @@ if target_action == 'attach':
 
 	if attach_type == 'ami':
 		target_volume_id = create_vol(target_instance_id, target_snapshot_id, target_region)
-		print(f'\nNew volume {target_volume_id} has been created from {target_snapshot_id}\n')
-
 		attachment_response = attach_vol(target_instance_id, target_volume_id, target_region)
-		if attachment_response:
+		
+		if attachment_response[0]:
 			target_drive_letter = rename_os_drive(target_instance_id, target_volume_id, sctask_number, target_region).replace('\n','')
-			print(f'\nAttached drive name is: {target_drive_letter}: {sctask_number} ({target_volume_id})\n')
+
+			print("\n========================================\n")
+			print("ATTACHMENT INFORMATION SUMMARY")
+			print("\n========================================\n")
+			print(f'Volume ID: {target_volume_id}\n')
+			print(f'Device Name: {attachment_response}[1]\n')
+			print(f'Drive Letter: {target_drive_letter}\n')
+			print(f'Drive Name: {sctask_number} ({target_volume_id})\n')
+			print('\nIMPORTANT! Please provide the information specified above in the ServiceNow case\n')
 		else:
 			print(f'\nERROR: Devices from xvdf to xvdp are already occupied. No more slots are available on the server.\n')
