@@ -33,7 +33,7 @@ if target_action == 'attach':
 	attach_type = attach_type
 
 	if attach_type == 'ami':
-		target_volume_id = create_vol(target_instance_id, target_snapshot_id, target_region)
+		target_volume_id = create_vol(target_instance_id, target_snapshot_id, sctask_number, target_region)
 		attachment_response = attach_vol(target_instance_id, target_volume_id, target_region)
 
 		if attachment_response[0]:

@@ -1,7 +1,7 @@
 import boto3
 import string
 
-def create_vol(target_instance_id, target_snapshot_id, target_region):
+def create_vol(target_instance_id, target_snapshot_id, sctask_number, target_region):
 	ec2_client = boto3.client("ec2", region_name = target_region)
 	ec2_resource = boto3.resource('ec2', region_name = target_region)
 
@@ -13,5 +13,6 @@ def create_vol(target_instance_id, target_snapshot_id, target_region):
 	volume_type = ec2_client.describe_volumes(VolumeIds=[snapshot_volume_id])["Volumes"][0]['VolumeType']
 
 	new_volume_id = ec2_client.create_volume(AvailabilityZone=availabilty_zone, SnapshotId=target_snapshot_id, VolumeType=volume_type)['VolumeId']
+	ec2_client.create_tags(Resources=[new_volume_id], Tags=[{'Key':'AutoRestore','Value':'True'}, {'Key':'SCTASK','Value':sctask_number}])
 
 	return new_volume_id
