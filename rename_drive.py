@@ -8,6 +8,12 @@ def rename_os_drive(target_instance_id, target_volume_id, sctask_number, target_
 	ssm_doc_name = 'backup-restore-rename'
 	ssm_client = boto3.client('ssm', region_name=target_region)
 
+	#safety delete in case a previous document still remains
+	try:
+		ssm_delete_response = ssm_client.delete_document(Name=ssm_doc_name)
+	except Exception as e:
+		pass
+
 	ssm_create_response = ssm_client.create_document(Content = ssm_json, Name = ssm_doc_name, DocumentType = 'Command', DocumentFormat = 'JSON', TargetType =  "/AWS::EC2::Instance")
 
 	ssm_run_response = ssm_client.send_command(InstanceIds = [target_instance_id], DocumentName=ssm_doc_name, DocumentVersion="$DEFAULT", TimeoutSeconds=120,  Parameters={'VolumeID':[target_volume_id], 'CaseNum':[sctask_number]})
