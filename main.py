@@ -20,7 +20,7 @@ target_action = "attach"
 
 target_snapshot_id = os.environ["Snapshot ID"]
 sctask_number = os.environ["SCTASK Number"].lower().replace('sctask','')
-target_instance = os.environ["Instance Name"].strip()
+target_instance = os.environ["Instance Name"].strip().upper()
 target_region = region_lookup[target_instance[:4].upper()]
 
 ec2_client = boto3.client("ec2", region_name = target_region)
