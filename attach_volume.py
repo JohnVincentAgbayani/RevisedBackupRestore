@@ -8,7 +8,7 @@ def attach_vol(target_instance_id, target_volume_id, target_region):
 	attached = False
 
 	volume_attachment_response = ""
-	device_slots = list(string.ascii_lowercase)[5:17]
+	device_slots = list(string.ascii_lowercase)[5:26]
 	time.sleep(10)
 	
 
