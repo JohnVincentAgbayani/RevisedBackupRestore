@@ -32,8 +32,7 @@ if target_action == 'attach':
 	attachment_response = attach_vol(target_instance_id, target_volume_id, target_region)
 
 	if attachment_response[0]:
-		target_drive_letter = rename_os_drive(target_instance_id, target_volume_id, sctask_number, target_region).split('drive_letter_marker')[1].replace('\n','')
-		print(target_drive_letter)
+		target_drive_letter = rename_os_drive(target_instance_id, target_volume_id, sctask_number, target_region).split('drive_letter_marker')[1].replace('\n','').strip()
 		target_device_name = attachment_response[1]['Device']
 
 		print("\n========================================")
