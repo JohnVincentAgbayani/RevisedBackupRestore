@@ -36,7 +36,8 @@
           "Write-Host $target_drive_letter",
           "$target_label = $target_snow + ' (' + $target_label + ')'",
           "Set-Volume -DriveLetter $target_drive_letter -NewFileSystemLabel $target_label}}",
-          "echo 'drive_letter_marker ' + $target_drive_letter",
+          "echo 'drive_letter_marker '",
+          "echo $target_drive_letter"
           ""
         ]
       }
